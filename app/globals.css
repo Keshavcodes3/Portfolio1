@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------------ */
+/*  Theme tokens — dark is the default "digital home" mood             */
+/* ------------------------------------------------------------------ */
+:root {
+  --bg: 0 0 0;          /* black */
+  --surface: 15 15 15;
+  --border: 39 39 45;
+  --fg: 237 237 240;
+  --muted: 161 161 170;
+  --faint: 113 113 122;
+  --accent: 255 255 255;  /* white */
+}
+
+.light {
+  --bg: 250 250 249;
+  --surface: 255 255 255;
+  --border: 228 228 231;
+  --fg: 24 24 27;
+  --muted: 82 82 91;
+  --faint: 130 130 140;
+  --accent: 0 0 0;    /* black */
+}
+
+* {
+  border-color: rgb(var(--border));
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+}
+
+body {
+  background-color: rgb(var(--bg));
+  color: rgb(var(--fg));
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* selection */
+::selection {
+  background: rgb(var(--accent) / 0.25);
+  color: rgb(var(--fg));
+}
+
+/* thin custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--border));
+  border-radius: 999px;
+  border: 2px solid rgb(var(--bg));
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--faint));
+}
+
+/* subtle grid / noise backdrop */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgb(var(--border) / 0.4) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(var(--border) / 0.4) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+}
+
+.link-underline {
+  background-image: linear-gradient(rgb(var(--accent)), rgb(var(--accent)));
+  background-size: 0% 1px;
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  transition: background-size 0.3s ease;
+}
+.link-underline:hover {
+  background-size: 100% 1px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
